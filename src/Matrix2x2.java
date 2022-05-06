@@ -44,7 +44,7 @@ public class Matrix2x2
     }
 
     /*
-        Creates a matrix that transforms points on the x and y axis respectively
+        Creates a matrix that transforms points on the x and y-axis respectively
     */
     public static Matrix2x2 ScaleMatrix(float x, float y)
     {
