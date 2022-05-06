@@ -73,16 +73,14 @@ class Main
 
             float angle = 30;
 
-            float c = (float) Math.cos(angle * (3.14/180));
-            float s = (float) Math.sin(angle * (3.14/180));
+            Matrix2x2 rot = Matrix2x2.ZAxisRotationMatrix(angle);
+            Matrix2x2 scale = Matrix2x2.ScaleMatrix(1.5f, 1.5f);
 
-            Matrix2x2 zAxisRotation = new Matrix2x2
-                            (c, -s,
-                            s, c);
+            Matrix2x2 transform = Matrix2x2.mul(rot, scale);
 
-
-            for (int i = 0; i < vertices.length; i++) {
-                vertices[i] = Matrix2x2.mul(zAxisRotation, vertices[i]);
+            for (int i = 0; i < vertices.length; i++)
+            {
+                vertices[i] = Matrix2x2.mul(transform, vertices[i]);
             }
 
             Vector2[] screenCoordinates = NDCToScreenSpace(vertices, X, Y);
