@@ -1,3 +1,10 @@
+/*
+    Column major 2x2 matrix class
+
+    Laid out as follows:
+    [a11, a21]
+    [a12, a22]
+*/
 public class Matrix2x2
 {
     //Column major
@@ -22,6 +29,9 @@ public class Matrix2x2
         return result;
     }
 
+    /*
+        Performs matrix to matrix multiplication
+    */
     public static Matrix2x2 mul(Matrix2x2 lhs, Matrix2x2 rhs)
     {
         Matrix2x2 result = new Matrix2x2(0, 0, 0, 0);
@@ -44,7 +54,7 @@ public class Matrix2x2
     }
 
     /*
-        Creates a matrix that transforms points on the x and y-axis respectively
+        Creates a matrix that scales points on the x and y-axis respectively
     */
     public static Matrix2x2 ScaleMatrix(float x, float y)
     {
