@@ -8,22 +8,6 @@ import java.math.*;
 class Main
 {
 
-
-
-
-    /*
-        Converts screen spaces coordinates to normalized device coordinates
-     */
-    public static Vector2 ScreenSpaceToNDC(Vector2 screenPnt, int width, int height)
-    {
-        Vector2 ndc = new Vector2(0, 0);
-
-        ndc.x = ((screenPnt.x / width)  * 2) - 1;
-        ndc.y = ((screenPnt.y / height) * 2) - 1;
-
-        return ndc;
-    }
-
     static final int X = 380, Y = 250;
     static BufferedImage I = new BufferedImage(X, Y, BufferedImage.TYPE_INT_RGB);
     static Vector2[] vertices = {
@@ -66,7 +50,7 @@ class Main
             {
                 for (int j = 0; j < Y; ++j)
                 {
-                    Vector2 NDCPt = ScreenSpaceToNDC(new Vector2(i, j), X, Y);
+                    Vector2 NDCPt = CGMath.ScreenSpaceToNDC(new Vector2(i, j), X, Y);
                     if (CGMath.pointInsideTriangle(vertices[0], vertices[1], vertices[2], NDCPt))
                     {
                         I.setRGB(i, j, 0xffffff);
@@ -76,9 +60,6 @@ class Main
             f.setSize(new Dimension(X, Y + 22));
             f.setVisible(true);
             f.add("Center", canvas);
-            try {
-                Thread.sleep(1000);
-            }catch(Exception e){}
         }
 
     }
