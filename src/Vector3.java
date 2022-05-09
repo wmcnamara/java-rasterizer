@@ -6,6 +6,12 @@ public class Vector3
         this.y = y;
         this.z = z;
     }
+    public Vector3(float x, float y)
+    {
+        this.x = x;
+        this.y = y;
+        this.z = 1; //Homogenous coordinate
+    }
 
     public Vector3()
     {
@@ -23,5 +29,7 @@ public class Vector3
     {
         return (int)a.x == (int)b.x && (int)a.y == (int)b.y && (int)a.z == (int)b.z;
     }
+
+    public Vector2 toVector2() { return new Vector2(x, y); }
     public float x, y, z;
 }

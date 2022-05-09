@@ -1,2 +1,2 @@
-# java-rasterizer
-Simple 2D Java rasterizer with minimal dependencies
+# Java Rasterizer
+Simple 2D Java rasterizer with minimal dependencies.

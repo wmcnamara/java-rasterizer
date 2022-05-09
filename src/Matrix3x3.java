@@ -86,5 +86,21 @@ public class Matrix3x3
         return new Matrix3x3(scale.x, 0,0, 0, scale.y, 0, 0, 0, scale.z);
     }
 
+    /*
+        Creates a matrix that translates points on the x and y-axis respectively
+    */
+    public static Matrix3x3 TranslationMatrix(float x, float y)
+    {
+        return new Matrix3x3(1, 0,x, 0, 1, y, 0, 0, 1);
+    }
+
+    /*
+        Creates a matrix that translates points on the x and y-axis respectively
+    */
+    public static Matrix3x3 TranslationMatrix(Vector2 vec)
+    {
+        return new Matrix3x3(1, 0, vec.x, 0, 1, vec.y, 0, 0, 1);
+    }
+
     public float a11, a21, a31, a12, a22, a32, a13, a23, a33;
 }

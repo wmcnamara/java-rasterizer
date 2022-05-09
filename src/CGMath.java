@@ -20,6 +20,16 @@ public class CGMath
     }
 
     /*
+       Checks if a point is inside a triangle defined like tp1, tp2 and tp3
+   */
+    public static boolean pointInsideTriangle(Vector3 tp1, Vector3 tp2, Vector3 tp3, Vector3 pToTest)
+    {
+        return edgeFunction(tp1.toVector2(), tp2.toVector2(), pToTest.toVector2()) &&
+                edgeFunction(tp2.toVector2(), tp3.toVector2(), pToTest.toVector2()) &&
+                edgeFunction(tp3.toVector2(), tp1.toVector2(), pToTest.toVector2());
+    }
+
+    /*
         Converts normalized device coordinates to screen space coordinates
     */
     public static Vector2 NDCToScreenSpace(Vector2 ndcCoord, int screenWidth, int screenHeight)
@@ -40,6 +50,20 @@ public class CGMath
 
         ndc.x = ((screenPnt.x / width)  * 2) - 1;
         ndc.y = ((screenPnt.y / height) * 2) - 1;
+
+        return ndc;
+    }
+
+    /*
+        Converts screen spaces coordinates to normalized device coordinates
+     */
+    public static Vector3 ScreenSpaceToNDC(Vector3 screenPnt, int width, int height)
+    {
+        Vector3 ndc = new Vector3(0, 0);
+
+        ndc.x = ((screenPnt.x / width)  * 2) - 1;
+        ndc.y = ((screenPnt.y / height) * 2) - 1;
+        ndc.z = 0f;
 
         return ndc;
     }
