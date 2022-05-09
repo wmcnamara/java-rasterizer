@@ -61,5 +61,5 @@ public class Matrix2x2
         return new Matrix2x2(x, 0,0, y);
     }
 
-    float a11, a21, a12, a22;
+    public float a11, a21, a12, a22;
 }

@@ -6,7 +6,13 @@ public class Vector2
         this.y = y;
     }
 
-    public float dot(Vector2 a, Vector2 b)
+    public Vector2()
+    {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    public static float dot(Vector2 a, Vector2 b)
     {
         return a.x * b.x + a.y * b.y;
     }
