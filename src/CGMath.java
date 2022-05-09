@@ -32,6 +32,19 @@ public class CGMath
     }
 
     /*
+        Converts screen spaces coordinates to normalized device coordinates
+     */
+    public static Vector2 ScreenSpaceToNDC(Vector2 screenPnt, int width, int height)
+    {
+        Vector2 ndc = new Vector2(0, 0);
+
+        ndc.x = ((screenPnt.x / width)  * 2) - 1;
+        ndc.y = ((screenPnt.y / height) * 2) - 1;
+
+        return ndc;
+    }
+
+    /*
         Converts normalized device coordinates to screen space coordinates
     */
     public static Vector2[] NDCToScreenSpace(Vector2[] ndcCoords, int screenWidth, int screenHeight)
