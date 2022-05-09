@@ -64,18 +64,26 @@ public class Matrix3x3
     */
     public static Matrix3x3 ZAxisRotationMatrix(float angle)
     {
-        float c = (float) Math.cos(angle * (3.14/180.0));
-        float s = (float) Math.sin(angle * (3.14f/180.0));
+        float c = (float) Math.cos(angle * (3.14f / 180.0));
+        float s = (float) Math.sin(angle * (3.14f / 180.0));
 
         return new Matrix3x3(c, -s, 0, s, c, 0, 0, 0, 1);
     }
 
     /*
-        Creates a matrix that scales points on the x and y-axis respectively
+        Creates a matrix that scales points on the x y and z axis respectively
     */
     public static Matrix3x3 ScaleMatrix(float x, float y, float z)
     {
         return new Matrix3x3(x, 0,0, 0, y, 0, 0, 0, z);
+    }
+
+    /*
+        Creates a matrix that scales points on the x and y-axis respectively
+    */
+    public static Matrix3x3 ScaleMatrix(Vector3 scale)
+    {
+        return new Matrix3x3(scale.x, 0,0, 0, scale.y, 0, 0, 0, scale.z);
     }
 
     public float a11, a21, a31, a12, a22, a32, a13, a23, a33;

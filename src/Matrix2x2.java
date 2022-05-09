@@ -60,6 +60,10 @@ public class Matrix2x2
     {
         return new Matrix2x2(x, 0,0, y);
     }
+    public static Matrix2x2 ScaleMatrix(Vector2 scale)
+    {
+        return new Matrix2x2(scale.x, 0,0, scale.y);
+    }
 
     public float a11, a21, a12, a22;
 }
