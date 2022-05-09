@@ -3,7 +3,7 @@ import java.awt.image.*;
 
 class Main
 {
-    static final int X = 380, Y = 250;
+    static final int windowWidth = 380, windowHeight = 250;
 
     static Vector3[] vertices = {
             new Vector3(0.5f, -.5f),
@@ -13,7 +13,7 @@ class Main
 
     static public void main(String[] args)
     {
-        Rasterizer.Rasterize(vertices, X, Y);
+        Rasterizer.Rasterize(vertices, windowWidth, windowHeight);
     }
 }
 
