@@ -3,12 +3,12 @@ import java.awt.image.*;
 
 class Main
 {
-    static final int windowWidth = 380, windowHeight = 250;
+    static final int windowWidth = 800, windowHeight = 600;
 
     static Vector3[] vertices = {
-            new Vector3(0.5f, -.5f),
-            new Vector3(-.5f, -.5f),
-            new Vector3(0, 0.5f)
+            new Vector3(0.5f, -.5f, 1.0f),
+            new Vector3(-.5f, -.5f, 1.0f),
+            new Vector3(0, 0.5f, 1.0f)
     };
 
     static public void main(String[] args)

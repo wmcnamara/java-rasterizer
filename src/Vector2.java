@@ -22,6 +22,6 @@ public class Vector2
         return (int)a.x == (int)b.x && (int)a.y == (int)b.y;
     }
 
-    public Vector3 toVector3() { return new Vector3(x, y, 1); }
+    public Vector3 toVector3() { return new Vector3(x, y, 0); }
     public float x, y;
 }

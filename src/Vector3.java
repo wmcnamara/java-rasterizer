@@ -10,7 +10,7 @@ public class Vector3
     {
         this.x = x;
         this.y = y;
-        this.z = 1; //Homogenous coordinate
+        this.z = 0; //Homogenous coordinate
     }
 
     public Vector3()

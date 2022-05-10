@@ -10,17 +10,18 @@ public class Rasterizer
             return;
 
         //Create a frame and rasterizer buffer data
-        Frame f = new Frame("Weston's Rasterizer");
+        Frame f = new Frame("Rasterizer");
         BufferedImage rasterBuffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         MainCanvas canvas = new MainCanvas(rasterBuffer);
 
         //Fill the background
-        Rasterizer.FillBackground(rasterBuffer, 0x000000);
+        Rasterizer.FillBackground(rasterBuffer, 0xffffff);
 
         //Setup transformations
-        float angle = 0;
-        Vector3 scale = new Vector3(1.0f, 1.0f, 1.0f);
-        Vector2 pos = new Vector2(0, 0);
+        float angle = 15;
+        Vector3 scale = new Vector3(1.2f, 1.2f, 1.2f);
+        Vector2 pos = new Vector2(.1f, 0);
+
 
         Matrix3x3 rot = Matrix3x3.ZAxisRotationMatrix(angle);
         Matrix3x3 scaleMat = Matrix3x3.ScaleMatrix(scale);
@@ -35,7 +36,7 @@ public class Rasterizer
             vertices[i] = Matrix3x3.mul(transform, vertices[i]);
         }
 
-        //Draw triangles Perform triangle contains tests by converting the screen space coordinate to
+        //Draw triangles. Perform triangle contains tests by converting the screen space coordinate to
         //normalized device coordinates and performing an edge test.
         for (int i = 0; i < width; ++i)
         {
@@ -45,11 +46,12 @@ public class Rasterizer
 
                 if (CGMath.pointInsideTriangle(vertices[0], vertices[1], vertices[2], NDCPt.toVector3()))
                 {
-                    rasterBuffer.setRGB(i, j, 0xffffff);
+                    rasterBuffer.setRGB(i, j, 0xff0000);
                 }
             }
         }
 
+        //Display the image
         f.setSize(new Dimension(width, height + 20)); //Add a small offset to adjust for the window bar
         f.setVisible(true);
         f.add("Center", canvas);
