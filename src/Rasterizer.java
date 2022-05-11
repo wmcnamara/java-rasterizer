@@ -2,11 +2,21 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 
+/*
+    Provides a set of general static functions for the purpose of rasterizing images.
+*/
 public class Rasterizer
 {
-    public static void Rasterize(Vector3[] vertices, int width, int height)
+    /** Rasterizes a set of vertices with a specific screen size, and creates a display window.
+     * @param vertices Set of vertices to rasterize. Should represent triangles, the amount of elements should be a
+     * multiple of three. If the vertex count is less than 3 or not an even 3 multiple it will not create a window.
+     * @param width Width of the window to draw to
+     * @param height Height of the window to draw to
+     * @param backGroundColor Hexadecimal color of the screen background to draw over
+     */
+    public static void Rasterize(Vector3[] vertices, int width, int height, int backGroundColor)
     {
-        if (vertices.length < 3)
+        if (vertices.length % 3 != 0 || vertices.length < 0)
             return;
 
         //Create a frame and rasterizer buffer data
@@ -17,25 +27,6 @@ public class Rasterizer
         //Fill the background
         Rasterizer.FillBackground(rasterBuffer, 0xffffff);
 
-        //Setup transformations
-        float angle = 15;
-        Vector3 scale = new Vector3(1.2f, 1.2f, 1.2f);
-        Vector2 pos = new Vector2(.1f, 0);
-
-
-        Matrix3x3 rot = Matrix3x3.ZAxisRotationMatrix(angle);
-        Matrix3x3 scaleMat = Matrix3x3.ScaleMatrix(scale);
-        Matrix3x3 translate = Matrix3x3.TranslationMatrix(pos);
-
-        //Multiply transformations together
-        Matrix3x3 transform = Matrix3x3.mul(translate, Matrix3x3.mul(rot, scaleMat));
-
-        //Perform vertex transformations
-        for (int i = 0; i < vertices.length; i++)
-        {
-            vertices[i] = Matrix3x3.mul(transform, vertices[i]);
-        }
-
         //Draw triangles. Perform triangle contains tests by converting the screen space coordinate to
         //normalized device coordinates and performing an edge test.
         for (int i = 0; i < width; ++i)
@@ -44,10 +35,14 @@ public class Rasterizer
             {
                 Vector2 NDCPt = CGMath.ScreenSpaceToNDC(new Vector2(i, j), width, height);
 
-                if (CGMath.pointInsideTriangle(vertices[0], vertices[1], vertices[2], NDCPt.toVector3()))
+                for (int t = 0; t < vertices.length; t += 3)
                 {
-                    rasterBuffer.setRGB(i, j, 0xff0000);
+                    if (CGMath.pointInsideTriangle(vertices[t + 0], vertices[t + 1], vertices[t + 2], NDCPt.toVector3()))
+                    {
+                        rasterBuffer.setRGB(i, j, 0xff0000);
+                    }
                 }
+
             }
         }
 

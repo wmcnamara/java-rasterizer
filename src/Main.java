@@ -7,13 +7,35 @@ class Main
 
     static Vector3[] vertices = {
             new Vector3(0.5f, -.5f, 1.0f),
-            new Vector3(-.5f, -.5f, 1.0f),
-            new Vector3(0, 0.5f, 1.0f)
+            new Vector3(-0.5f, -.5f, 1.0f),
+            new Vector3(-.5f, 0.5f, 1.0f),
+            new Vector3(-0.5f, .5f, 1.0f),
+            new Vector3(.5f, .5f, 1.0f),
+            new Vector3(.5f, -0.5f, 1.0f)
     };
 
     static public void main(String[] args)
     {
-        Rasterizer.Rasterize(vertices, windowWidth, windowHeight);
+        //Setup transformations
+        float angle = 10;
+        Vector3 scale = new Vector3(1.f, 1.f, 1.f);
+        Vector2 pos = new Vector2(0.0f, 0);
+
+
+        Matrix3x3 rot = Matrix3x3.ZAxisRotationMatrix(angle);
+        Matrix3x3 scaleMat = Matrix3x3.ScaleMatrix(scale);
+        Matrix3x3 translate = Matrix3x3.TranslationMatrix(pos);
+
+        //Multiply transformations together
+        Matrix3x3 transform = Matrix3x3.mul(translate, Matrix3x3.mul(rot, scaleMat));
+
+        //Perform vertex transformations
+        for (int i = 0; i < vertices.length; i++)
+        {
+            vertices[i] = Matrix3x3.mul(transform, vertices[i]);
+        }
+
+        Rasterizer.Rasterize(vertices, windowWidth, windowHeight, 0xffffff);
     }
 }
 
