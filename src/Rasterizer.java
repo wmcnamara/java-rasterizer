@@ -14,7 +14,7 @@ public class Rasterizer
      * @param height Height of the window to draw to
      * @param backGroundColor Hexadecimal color of the screen background to draw over
      */
-    public static void Rasterize(Vector3[] vertices, int width, int height, int backGroundColor)
+    public static void Rasterize(Vertex[] vertices, int width, int height, int backGroundColor)
     {
         if (vertices.length % 3 != 0 || vertices.length < 0)
             return;
@@ -33,13 +33,37 @@ public class Rasterizer
         {
             for (int j = 0; j < height; ++j)
             {
-                Vector2 NDCPt = CGMath.ScreenSpaceToNDC(new Vector2(i, j), width, height);
+                Vector3 pixelPos = new Vector3(i, j, 1);
 
                 for (int t = 0; t < vertices.length; t += 3)
                 {
-                    if (CGMath.pointInsideTriangle(vertices[t + 0], vertices[t + 1], vertices[t + 2], NDCPt.toVector3()))
+                    Vector3 a = vertices[t + 0].position;
+                    Vector3 b = vertices[t + 1].position;
+                    Vector3 c = vertices[t + 2].position;
+
+                    Vector3 aScreenSpace = CGMath.NDCToScreenSpace(a, width, height);
+                    Vector3 bScreenSpace = CGMath.NDCToScreenSpace(b, width, height);
+                    Vector3 cScreenSpace = CGMath.NDCToScreenSpace(c, width, height);
+
+                    Vector3 vColorA = vertices[t + 0].color;
+                    Vector3 vColorB = vertices[t + 1].color;
+                    Vector3 vColorC = vertices[t + 2].color;
+
+                    Vector3 barycentricCoords = CGMath.ComputeBarycentricCoordinates(
+                            aScreenSpace.toVector2(),
+                            bScreenSpace.toVector2(),
+                            cScreenSpace.toVector2(),
+                            pixelPos.toVector2());
+
+                    if (CGMath.pointInsideTriangle(aScreenSpace, bScreenSpace, cScreenSpace, pixelPos))
                     {
-                        rasterBuffer.setRGB(i, j, 0xff0000);
+                        vColorA = Vector3.mul(vColorA, barycentricCoords.x);
+                        vColorB = Vector3.mul(vColorB, barycentricCoords.y);
+                        vColorC = Vector3.mul(vColorC, barycentricCoords.z);
+
+                        int pixelColor = CGMath.RGBToHex(Vector3.add(vColorA, vColorB, vColorC));
+
+                        rasterBuffer.setRGB(i, j, pixelColor);
                     }
                 }
 

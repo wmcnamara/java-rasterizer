@@ -56,6 +56,22 @@ public class CGMath
         return result;
     }
 
+    /** Converts normalized device coordinates to screen space coordinates
+     * @param ndcCoord Converts a normalized device coordinate to a screen space coordinate
+     * @param screenWidth The width of the screen
+     * @param screenHeight The height of the screen
+     * @return A screen space coordinate
+     */
+    public static Vector3 NDCToScreenSpace(Vector3 ndcCoord, int screenWidth, int screenHeight)
+    {
+        Vector3 result = new Vector3(0, 0);
+        result.x = screenWidth * ((ndcCoord.x + 1.0f) / 2.0f);
+        result.y = screenHeight * ((ndcCoord.y + 1.0f) / 2.0f);
+        result.z = 1.0f;
+
+        return result;
+    }
+
     /** Converts screen spaces coordinates to normalized device coordinates
      * @param screenPnt Screen space coordinate (x, y pixel position)
      * @param width Width of the screen that the screenpoint lies in
@@ -111,5 +127,45 @@ public class CGMath
         }
 
         return scPts;
+    }
+
+    /** Computes the barycentric coordinates of a point with respect to a given triangle
+     * Solution adapted from: http://realtimecollisiondetection.net/
+     * @param a The first point of the triangle
+     * @param b The second point of the triangle
+     * @param c The third point of the triangle
+     * @param p Point to compute barycentric coordinates for
+     * @return A Vector3 containing the UVW barycentric coordinates for such a point
+     */
+    public static Vector3 ComputeBarycentricCoordinates(Vector2 a, Vector2 b, Vector2 c, Vector2 p)
+    {
+        Vector3 bcCoords = new Vector3();
+
+        Vector2 v0 = Vector2.sub(b, a);
+        Vector2 v1 = Vector2.sub(c, a);
+        Vector2 v2 = Vector2.sub(p, a);
+
+        float d00 = Vector2.dot(v0, v0);
+        float d01 = Vector2.dot(v0, v1);
+        float d11 = Vector2.dot(v1, v1);
+        float d20 = Vector2.dot(v2, v0);
+        float d21 = Vector2.dot(v2, v1);
+
+        float denom = d00 * d11 - d01 * d01;
+
+        bcCoords.x = (d11 * d20 - d01 * d21) / denom;
+        bcCoords.y = (d00 * d21 - d01 * d20) / denom;
+        bcCoords.z = 1.0f -  bcCoords.x - bcCoords.y;
+
+        return bcCoords;
+    }
+
+    public static int RGBToHex(Vector3 color)
+    {
+        int r = (int)(color.x * 255.0f);
+        int g = (int)(color.y * 255.0f);
+        int b = (int)(color.z * 255.0f);
+
+        return (r<<16) | (g<<8) | b;
     }
 }

@@ -25,6 +25,19 @@ public class Vector3
         return a.x * b.x + a.y * b.y + a.z * b.z;
     }
 
+    public static Vector3 mul(Vector3 lhs, float rhs)
+    {
+        return new Vector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs);
+    }
+
+    public static Vector3 add(Vector3 lhs, Vector3 rhs)
+    {
+        return new Vector3(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z);
+    }
+    public static Vector3 add(Vector3 lhs, Vector3 rhs, Vector3 rrhs)
+    {
+        return new Vector3(lhs.x + rhs.x + rrhs.x, lhs.y + rhs.y + rrhs.y, lhs.z + rhs.z + rrhs.z);
+    }
     public static boolean equal(Vector3 a, Vector3 b)
     {
         return (int)a.x == (int)b.x && (int)a.y == (int)b.y && (int)a.z == (int)b.z;
