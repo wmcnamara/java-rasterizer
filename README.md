@@ -8,4 +8,9 @@ Everything else, including the matrix math library is written by me and containe
 
 ![Preview Image Of Triangle](preview.png)
 
-Contains a simple matrix algebra library to perform calculations, and outputs the rasterized pixels to a framebuffer with AWT
+Contains a simple matrix algebra library to perform calculations, and outputs the rasterized pixels to a framebuffer with AWT.
+
+Features:
+ - Fully contained matrix math library
+ - Barycentric coordinate calculations
+ - Can render any amount of 2D triangles
