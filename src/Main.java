@@ -20,9 +20,9 @@ class Main
     static public void main(String[] args)
     {
         //Setup transformations
-        float angle = -0;
-        Vector3 scale = new Vector3(.7f, .7f, .7f);
-        Vector2 pos = new Vector2(0.1f, 0);
+        float angle = 10;
+        Vector3 scale = new Vector3(1.0f, 1.0f, 1.0f);
+        Vector2 pos = new Vector2(0.0f, 0);
 
 
         Matrix3x3 rot = Matrix3x3.ZAxisRotationMatrix(angle);

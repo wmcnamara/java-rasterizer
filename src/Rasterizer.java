@@ -25,7 +25,7 @@ public class Rasterizer
         MainCanvas canvas = new MainCanvas(rasterBuffer);
 
         //Fill the background
-        Rasterizer.FillBackground(rasterBuffer, 0xffffff);
+        Rasterizer.FillBackground(rasterBuffer, backGroundColor);
 
         //Draw triangles. Perform triangle contains tests by converting the screen space coordinate to
         //normalized device coordinates and performing an edge test.
