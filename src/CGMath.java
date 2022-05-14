@@ -170,5 +170,5 @@ public class CGMath
         int b = Math.round((color.z * 255.0f));
 
         return (r << 16) | (g << 8) | b;
-    }
+    } //end RGBToHex
 }

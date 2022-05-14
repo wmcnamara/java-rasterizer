@@ -1,7 +1,5 @@
-/** 2x2 Matrix Class
- * Column major 2x2 matrix class
+/** Column major 2x2 Matrix Class
  * Laid out as follows:
- *
  * [a11, a21]
  * [a12, a22]
  */
@@ -72,7 +70,7 @@ public class Matrix2x2
     public static Matrix2x2 ScaleMatrix(float x, float y)
     {
         return new Matrix2x2(x, 0,0, y);
-    }
+    } //end ScaleMatrix
 
 
     /** Creates a matrix that scales points on the x and y-axis respectively
@@ -82,7 +80,7 @@ public class Matrix2x2
     public static Matrix2x2 ScaleMatrix(Vector2 scale)
     {
         return new Matrix2x2(scale.x, 0,0, scale.y);
-    }
+    } //end ScaleMatrix
 
     public float a11, a21, a12, a22;
-}
+} //end Matrix2x2

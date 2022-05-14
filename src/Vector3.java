@@ -44,7 +44,6 @@ public class Vector3
         return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
     } //end dot
 
-
     /** Perform scalar multiplication with a vector
      * @param lhs Left hand side of operation
      * @param rhs Right hand side of operation
