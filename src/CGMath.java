@@ -165,10 +165,10 @@ public class CGMath
      */
     public static int RGBToHex(Vector3 color)
     {
-        int r = (int)(color.x * 255.0f);
-        int g = (int)(color.y * 255.0f);
-        int b = (int)(color.z * 255.0f);
+        int r = Math.round((color.x * 255.0f));
+        int g = Math.round((color.y * 255.0f));
+        int b = Math.round((color.z * 255.0f));
 
-        return (r<<16) | (g<<8) | b;
+        return (r << 16) | (g << 8) | b;
     }
 }
