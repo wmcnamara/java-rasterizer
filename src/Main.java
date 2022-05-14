@@ -33,9 +33,9 @@ class Main
         Matrix3x3 transform = Matrix3x3.mul(translate, Matrix3x3.mul(rot, scaleMat));
 
         //Perform vertex transformations
-        for (int i = 0; i < vertices.length; i++)
+        for (Vertex v : vertices)
         {
-            vertices[i].position = Matrix3x3.mul(transform, vertices[i].position);
+            v.position = Matrix3x3.mul(transform, v.position);
         }
 
         Rasterizer.Rasterize(vertices, windowWidth, windowHeight, 0xffffff);
