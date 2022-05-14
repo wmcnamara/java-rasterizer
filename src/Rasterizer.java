@@ -8,8 +8,8 @@ import java.awt.image.Raster;
 public class Rasterizer
 {
     /** Rasterizes a set of vertices with a specific screen size, and creates a display window.
-     * @param vertices Set of vertices to rasterize. Should represent triangles, the amount of elements should be a
-     * multiple of three. If the vertex count is less than 3 or not an even 3 multiple it will not create a window.
+     * @param vertices Set of vertices to rasterize. Should represent triangles. The amount of elements should be a
+     * multiple of three. If the vertex count is less than 3 +-or not an even multiple of 3 it will not create a window.
      * @param width Width of the window to draw to
      * @param height Height of the window to draw to
      * @param backGroundColor Hexadecimal color of the screen background to draw over
@@ -37,18 +37,22 @@ public class Rasterizer
 
                 for (int t = 0; t < vertices.length; t += 3)
                 {
+                    //Get triangle vertices
                     Vector3 a = vertices[t + 0].position;
                     Vector3 b = vertices[t + 1].position;
                     Vector3 c = vertices[t + 2].position;
 
+                    //Convert them to screen space coordinates
                     Vector3 aScreenSpace = CGMath.NDCToScreenSpace(a, width, height);
                     Vector3 bScreenSpace = CGMath.NDCToScreenSpace(b, width, height);
                     Vector3 cScreenSpace = CGMath.NDCToScreenSpace(c, width, height);
 
+                    //Get vertex colors
                     Vector3 vColorA = vertices[t + 0].color;
                     Vector3 vColorB = vertices[t + 1].color;
                     Vector3 vColorC = vertices[t + 2].color;
 
+                    //Compute the barycentric coordinates of the pixel position
                     Vector3 barycentricCoords = CGMath.ComputeBarycentricCoordinates(
                             aScreenSpace.toVector2(),
                             bScreenSpace.toVector2(),
@@ -57,6 +61,7 @@ public class Rasterizer
 
                     if (CGMath.pointInsideTriangle(aScreenSpace, bScreenSpace, cScreenSpace, pixelPos))
                     {
+                        //Interpolate the color of the triangle between the barycentric coordinates
                         vColorA = Vector3.mul(vColorA, barycentricCoords.x);
                         vColorB = Vector3.mul(vColorB, barycentricCoords.y);
                         vColorC = Vector3.mul(vColorC, barycentricCoords.z);
@@ -74,7 +79,7 @@ public class Rasterizer
         f.setSize(new Dimension(width, height + 20)); //Add a small offset to adjust for the window bar
         f.setVisible(true);
         f.add("Center", canvas);
-    }
+    } //end Rasterize
 
     public static void FillBackground(BufferedImage rasterBuffer, int color)
     {

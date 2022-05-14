@@ -1,6 +1,5 @@
-/*
-    Class containing various utility functions for computer graphics mathematics
-*/
+/** Class containing various utility functions for computer graphics mathematics
+ */
 public class CGMath
 {
     /** Returns true if a point is on the right side of a line defined by a and b
@@ -160,12 +159,16 @@ public class CGMath
         return bcCoords;
     }
 
+    /** Converts an RGB value with ranges of 0-1 to an integer hexadecimal value
+     * @param color RGB values of the color
+     * @return hexadecimal color value
+     */
     public static int RGBToHex(Vector3 color)
     {
-        int r = (int)(color.x * 255.0f);
-        int g = (int)(color.y * 255.0f);
-        int b = (int)(color.z * 255.0f);
+        int r = Math.round((color.x * 255.0f));
+        int g = Math.round((color.y * 255.0f));
+        int b = Math.round((color.z * 255.0f));
 
-        return (r<<16) | (g<<8) | b;
-    }
+        return (r << 16) | (g << 8) | b;
+    } //end RGBToHex
 }

@@ -1,11 +1,21 @@
+/** 2 dimensional floating point vector class
+ *
+ */
 public class Vector2
 {
+    /** Constructs a 2D vector from its X Y coordinates
+     * @param x X coordinate
+     * @param y Y coordinate
+     */
     public Vector2(float x, float y)
     {
         this.x = x;
         this.y = y;
     }
 
+    /** Constructs an empty 2D vector with zero'd xy components
+     *
+     */
     public Vector2()
     {
         this.x = 0;
