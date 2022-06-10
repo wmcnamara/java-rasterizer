@@ -101,7 +101,7 @@ public class CGMath
 
         ndc.x = ((screenPnt.x / width)  * 2) - 1;
         ndc.y = ((screenPnt.y / height) * 2) - 1;
-        ndc.z = 0f;
+        ndc.z = 1f;
 
         return ndc;
     }
