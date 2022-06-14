@@ -79,8 +79,8 @@ public class Matrix3x3
      */
     public static Matrix3x3 ZAxisRotationMatrix(float angle)
     {
-        float c = (float) Math.cos(angle * (3.14f / 180.0));
-        float s = (float) Math.sin(angle * (3.14f / 180.0));
+        float c = (float) Math.cos(angle * (3.14f / 180.0f));
+        float s = (float) Math.sin(angle * (3.14f / 180.0f));
 
         return new Matrix3x3(c, -s, 0, s, c, 0, 0, 0, 1);
     }
