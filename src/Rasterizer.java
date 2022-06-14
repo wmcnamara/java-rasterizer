@@ -16,7 +16,7 @@ public class Rasterizer
      */
     public static void Rasterize(Vertex[] vertices, int width, int height, int backGroundColor)
     {
-        if (vertices.length % 3 != 0 || vertices.length < 0)
+        if (vertices.length % 3 != 0)
             return;
 
         //Create a frame and rasterizer buffer data
