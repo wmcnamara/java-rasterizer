@@ -42,6 +42,11 @@ public class Vector2
         return v;
     }
 
+    /** Computes the dot product of two vectors
+     * @param a First vector
+     * @param b Second vector
+     * @return Dot product result
+     */
     public static float dot(Vector2 a, Vector2 b)
     {
         return a.x * b.x + a.y * b.y;
